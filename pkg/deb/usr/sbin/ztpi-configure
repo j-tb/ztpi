@@ -39,11 +39,11 @@ try:
     dhcpd_tmpl = jinja2.Template(dhcpd_data)
     if 'dhcp-server' in ztpi_config_data.keys():
         dhcpd_file = open(dhcpd_conf,"rw+")
-        
+
 except:
 
 #generate isc-dhcp-server configuration
-try:
+ try:
     #default dhcpd interface
     dhcpd_inteface = 'eth0'
 
