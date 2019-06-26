@@ -1,31 +1,31 @@
 # Update System to latest binaries.
-apt-get update
-apt-get upgrade
+apt-get -y  update
+apt-get -y  upgrade
 
 # Default Raspian does not have all locales
 # Causes Perl environment errors during apt process.
 #
 # This takes a while to run, so hopefully we can
 # do it once and keep in base image. Uncomment to setup locales
-#apt-get install locales
+#apt-get -y  install locales
 #dpkg-reconfigure locales
 
 # Install packages for ZTP Process.
 # Expect some of these to fail startup process.
-apt-get install isc-dhcp-server
-apt-get install nginx-full
-apt-get install atftpd
-apt-get install vsftpd
-apt-get install git
+apt-get -y  install isc-dhcp-server
+apt-get -y  install nginx-full
+apt-get -y  install atftpd
+apt-get -y  install vsftpd
+apt-get -y  install git
 
 # Install generic network tools
-apt-get install screen
-apt-get install mtr
-apt-get install nmap
-apt-get install traceroute
-apt-get install whois
-apt-get install tcpdump
-apt-get install dhcpdump
+apt-get -y  install screen
+apt-get -y  install mtr
+apt-get -y  install nmap
+apt-get -y  install traceroute
+apt-get -y  install whois
+apt-get -y  install tcpdump
+apt-get -y  install dhcpdump
 
 # Create Base directory structure.
 # This will be moved to a git repo before final
