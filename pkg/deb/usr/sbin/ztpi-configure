@@ -6,16 +6,16 @@ import netaddr
 #handle the generation of the ztp configuration files
 
 #template locations
-dhcpd_conf_j2 = "/opt/ztp/etc/dhcpd.conf.j2"
-isc_dhcp_server_j2 = "/opt/ztp/etc/isc-dhcp-server.j2"
-logrotate_ztp_j2 = "/opt/ztp/etc/logrotate-ztp.j2"
-rsyslogd_ztp_j2 = "/opt/ztp/etc/rsyslogd-ztp.j2"
+dhcpd_conf_j2 = "/ztp/etc/dhcpd.conf.j2"
+isc_dhcp_server_j2 = "ztp/etc/isc-dhcp-server.j2"
+logrotate_ztp_j2 = "/ztp/etc/logrotate-ztp.j2"
+rsyslogd_ztp_j2 = "/ztp/etc/rsyslogd-ztp.j2"
 
 #template destinations
-dhcpd_conf = "/opt/ztp/etc/dhcpd.conf"
-isc_dhcp_server = "/opt/ztp/etc/isc-dhcp-server"
-logrotate_ztp = "/opt/ztp/etc/logrotate-ztp"
-rsyslogd_ztp = "/opt/ztp/etc/rsyslogd-ztp"
+dhcpd_conf = "/ztp/etc/dhcpd.conf"
+isc_dhcp_server = "/ztp/etc/isc-dhcp-server"
+logrotate_ztp = "/ztp/etc/logrotate-ztp"
+rsyslogd_ztp = "/ztp/etc/rsyslogd-ztp"
 
 #ztp config file
 ztp_config = "/ztp/etc/ztp.conf"
