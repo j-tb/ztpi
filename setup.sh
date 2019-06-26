@@ -16,7 +16,13 @@ apt-get -y  install isc-dhcp-server
 apt-get -y  install nginx-full
 apt-get -y  install atftpd
 apt-get -y  install vsftpd
-apt-get -y  install git
+apt-get -y  install giti
+apt-get -y  install python-pip
+apt-get install python-netaddr
+apt-get install python-yaml
+
+# Install python modules with pip
+apt-get install python-pip
 
 # Install generic network tools
 apt-get -y  install screen
@@ -29,6 +35,9 @@ apt-get -y  install dhcpdump
 
 # Create Base directory structure.
 # This will be moved to a git repo before final
+# Need to add the users, script doesn't include user creation
+# useradd pi
+# useradd vsftpd
 groupadd ztp
 usermod -a -G ztp pi
 
@@ -40,6 +49,8 @@ chgrp -R ztp /ztp
 chmod -R 775 /ztp/
 
 # Insert step here to copy files from remote repo
+
+cp -R ztpi/pkg/deb/etc /ztp
 
 # Set vsftpd user homedir to /ztp/files
 usermod -d /ztp/files ftp

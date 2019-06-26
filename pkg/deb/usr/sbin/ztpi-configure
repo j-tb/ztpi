@@ -3,31 +3,31 @@ import sys
 import yaml
 import netaddr
 
-#handle the generation of the ztpi configuration files
+#handle the generation of the ztp configuration files
 
 #template locations
-dhcpd_conf_j2 = "/opt/ztpi/etc/dhcpd.conf.j2"
-isc_dhcp_server_j2 = "/opt/ztpi/etc/isc-dhcp-server.j2"
-logrotate_ztp_j2 = "/opt/ztpi/etc/logrotate-ztp.j2"
-rsyslogd_ztp_j2 = "/opt/ztpi/etc/rsyslogd-ztp.j2"
+dhcpd_conf_j2 = "/opt/ztp/etc/dhcpd.conf.j2"
+isc_dhcp_server_j2 = "/opt/ztp/etc/isc-dhcp-server.j2"
+logrotate_ztp_j2 = "/opt/ztp/etc/logrotate-ztp.j2"
+rsyslogd_ztp_j2 = "/opt/ztp/etc/rsyslogd-ztp.j2"
 
 #template destinations
-dhcpd_conf = "/opt/ztpi/etc/dhcpd.conf"
-isc_dhcp_server = "/opt/ztpi/etc/isc-dhcp-server"
-logrotate_ztp = "/opt/ztpi/etc/logrotate-ztp"
-rsyslogd_ztp = "/opt/ztpi/etc/rsyslogd-ztp"
+dhcpd_conf = "/opt/ztp/etc/dhcpd.conf"
+isc_dhcp_server = "/opt/ztp/etc/isc-dhcp-server"
+logrotate_ztp = "/opt/ztp/etc/logrotate-ztp"
+rsyslogd_ztp = "/opt/ztp/etc/rsyslogd-ztp"
 
-#ztpi config file
-ztpi_config = "/etc/ztpi/ztpi.conf"
+#ztp config file
+ztp_config = "/etc/ztp/ztp.conf"
 
 #load config file
 try:
-    ztpi_config_file = open(ztp_config, "r+")
-    ztpi_config_data = yaml.load(ztpi_config_file.read())
-    ztpi_config_file.close()
+    ztp_config_file = open(ztp_config, "r+")
+    ztp_config_data = yaml.load(ztp_config_file.read())
+    ztp_config_file.close()
 except:
     e = sys.exc_info()[0]
-    print "Unable to read {0} configuration file".format(ztpi_config)
+    print "Unable to read {0} configuration file".format(ztp_config)
 
 #generate dhcpd configuration
 try:
@@ -37,7 +37,7 @@ try:
     dhcpd_tmpl_file.close()
     #process template
     dhcpd_tmpl = jinja2.Template(dhcpd_data)
-    if 'dhcp-server' in ztpi_config_data.keys():
+    if 'dhcp-server' in ztp_config_data.keys():
         dhcpd_file = open(dhcpd_conf,"rw+")
 
 except:
@@ -53,9 +53,9 @@ except:
     isc_dhcp_server_tmpl_file.close()
     #process template
     isc_dhcp_server_tmpl = jinja2.Template(isc_dhcp_server_data)
-    if 'dhcp-server' in ztpi_config_data.keys():
-        if 'interface' in ztpi_config_data["dhcp-server"].keys():
-            dhcpd_inteface = ztpi_config_data["dhcp-server"]["interface"]
+    if 'dhcp-server' in ztp_config_data.keys():
+        if 'interface' in ztp_config_data["dhcp-server"].keys():
+            dhcpd_inteface = ztp_config_data["dhcp-server"]["interface"]
 
     #write out config file
     isc_dhcp_server_file = open(isc_dhcp_server,"rw+")
@@ -77,11 +77,11 @@ try:
     logrotate_ztp_tmpl_file.close()
     #process template
     logrotate_ztp_tmpl = jinja2.Template(logrotate_ztp_data)
-    if 'logging' in ztpi_config_data.keys():
-        if 'max-size' in ztpi_config_data['logging'].keys():
-            size = ztpi_config_data['logging']['max-size']
-        if 'rotate' in ztpi_config_data['logging'].keys():
-            rotate = ztpi_config_data['logging']['rotate']
+    if 'logging' in ztp_config_data.keys():
+        if 'max-size' in ztp_config_data['logging'].keys():
+            size = ztp_config_data['logging']['max-size']
+        if 'rotate' in ztp_config_data['logging'].keys():
+            rotate = ztp_config_data['logging']['rotate']
 
     #write out config file
     logrotate_ztp_file = open(logrotate_ztp,'rw+')
@@ -99,12 +99,12 @@ try:
     rsyslogd_ztp_tmpl_file.close()
     #process template
     rsyslogd_ztp_tmpl = jinja2.Template(rsyslogd_ztp_data)
-    if 'dhcp-server' in ztpi_config_data.keys():
-        if 'subnets' in ztpi_config_data['dhcp-server'].keys():
-            if len(ztpi_config_data['dhcp-server']['subnets']) > 0:
+    if 'dhcp-server' in ztp_config_data.keys():
+        if 'subnets' in ztp_config_data['dhcp-server'].keys():
+            if len(ztp_config_data['dhcp-server']['subnets']) > 0:
                 tmpl_subnets = []
                 #build subnet list
-                for item in ztpi_config_data['dhcp-server']['subnets']:
+                for item in ztp_config_data['dhcp-server']['subnets']:
                     new_subnet_mask = netaddr.IPAddress(item["subnet"]["netmask"])
                     new_subnet_str = item["subnet"]["address"]
                     prefix_len = new_subnet_mask.bits().count('1')
