@@ -61,7 +61,7 @@ except:
     isc_dhcp_server_file = open(isc_dhcp_server,"rw+")
     isc_dhcp_server_file.write(isc_dhcp_server_tmpl.render(dhcp_inteface=dhcpd_inteface))
     isc_dhcp_server_file.close()
-except:
+ except:
     e = sys.exc_info()[0]
     print "Unable to read {0} configuration file".format(isc_dhcp_server_j2)
 
