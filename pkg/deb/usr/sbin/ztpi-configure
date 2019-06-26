@@ -18,7 +18,7 @@ logrotate_ztp = "/opt/ztp/etc/logrotate-ztp"
 rsyslogd_ztp = "/opt/ztp/etc/rsyslogd-ztp"
 
 #ztp config file
-ztp_config = "/etc/ztp/ztp.conf"
+ztp_config = "/ztp/etc/ztp.conf"
 
 #load config file
 try:
